@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказы клиента{% endblock %}
+
+{% block content %}
+    <h1>Заказы клиента "{{ client.name }}"</h1>
+
+    <form method="get">
+        <label for="period">Выберите период:</label>
+        <select name="period" id="period">
+            <option value="7">За последние 7 дней (неделю)</option>
+            <option value="30">За последние 30 дней (месяц)</option>
+            <option value="365">За последние 365 дней (год)</option>
+        </select>
+        <button type="submit">Применить</button>
+    </form>
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>ID Клиента</th>
+                <th>Список покупок</th>
+                <th>Общая стоимость заказа</th>
+                <th>Дата регистрации</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            {% for order in client_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ client.id }}</td>
+                    <td>
+                        <ul>
+                            {% for item in order.product_id.all %}
+                                {{ item.product_name }} ({{ item.description }})<br>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ order.total_price }}</td>
+                    <td>{{ order.date_ordered|date:"Y-m-d H:i:s" }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

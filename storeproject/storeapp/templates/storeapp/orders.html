@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <h1>Все заказы</h1>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Клиента</th>
+                <th>ID Товара</th>
+                <th>Общая стоимость заказа</th>
+                <th>Дата регистрации</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in all_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.client_id }}</td>
+                    <td>{{ order.product_id }}</td>
+                    <td>{{ order.total_price }}</td>
+                    <td>{{ order.date_ordered|date:"Y-m-d H:i:s" }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Клиенты{% endblock %}
+
+{% block content %}
+    <h1>Все клиенты</h1>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Почта</th>
+                <th>Номер телефона</th>
+                <th>Адрес клиента</th>
+                <th>Дата регистрации</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in all_clients %}
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td><a href="{% url 'client_orders' client.id %}">{{ client.name }}</a></td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone_number }}</td>
+                    <td>{{ client.address }}</td>
+                    <td>{{ client.registration_date|date:"Y-m-d H:i:s" }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
