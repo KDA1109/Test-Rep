@@ -1,1 +1,1 @@
-# Python_Django_HW
+I am against conflicts
